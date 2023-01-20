@@ -20,8 +20,8 @@ public class Gun : MonoBehaviour
 
     private void awake()
     {
-        Data.bulletEffects = new List<Action>();
-        Data.weaponEffects = new List<Action>();
+        Data.BulletEffects = new List<Action>();
+        Data.WeaponEffects = new List<Action>();
     }
 
     private void Start()
