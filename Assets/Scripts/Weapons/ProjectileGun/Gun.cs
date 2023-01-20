@@ -71,7 +71,7 @@ public class Gun : MonoBehaviour
             bullet.GetComponent<Bullet>().Data = Data;
             rb.velocity = bullet.transform.up * Data.BulletSpeed;
 
-            foreach (Action action in Data.weaponEffects)
+            foreach (Action action in Data.WeaponEffects)
             {
                 action();
             }
@@ -107,11 +107,11 @@ public class Gun : MonoBehaviour
 
     public void AddWeaponEffect(Action effect)
     {
-        Data.weaponEffects.Add(effect);
+        Data.WeaponEffects.Add(effect);
     }
 
     public void AddBulletEffect(Action effect)
     {
-        Data.bulletEffects.Add(effect);
+        Data.BulletEffects.Add(effect);
     }
 }

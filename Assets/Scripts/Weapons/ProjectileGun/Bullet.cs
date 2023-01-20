@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
     {
         if (collide.gameObject.tag != "Bullet")
         {
-            foreach (Action action in Data.bulletEffects)
+            foreach (Action action in Data.BulletEffects)
             {
                 action();
             }

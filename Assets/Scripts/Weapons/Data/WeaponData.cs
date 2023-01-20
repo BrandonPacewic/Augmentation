@@ -24,6 +24,6 @@ public class WeaponData : ScriptableObject
 
     [Header("Effects")]
     // Effects should have a void return type and no parameters.
-    public List<Action> weaponEffects;
-    public List<Action> bulletEffects;
+    public List<Action> WeaponEffects;
+    public List<Action> BulletEffects;
 }
