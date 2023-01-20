@@ -65,7 +65,8 @@ public class Gun : MonoBehaviour
         // Spawn bullets.
         for (int i = 0; i < Data.BulletPerTrigger; i++)
         {
-            Quaternion eulerAngle = Quaternion.Euler(0, 0, rotation + UnityEngine.Random.Range(-Data.Spread, Data.Spread));
+            Quaternion eulerAngle =
+                Quaternion.Euler(0, 0, rotation + UnityEngine.Random.Range(-Data.Spread, Data.Spread));
             GameObject bullet = Instantiate(Bullet, SpawnPoint.position, eulerAngle);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             bullet.GetComponent<Bullet>().Data = Data;
