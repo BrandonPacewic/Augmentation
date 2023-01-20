@@ -105,12 +105,12 @@ public class Gun : MonoBehaviour
         Data = newData;
     }
 
-    public void addWeaponEffect(Action effect)
+    public void AddWeaponEffect(Action effect)
     {
         Data.weaponEffects.Add(effect);
     }
 
-    public void addBulletEffect(Action effect)
+    public void AddBulletEffect(Action effect)
     {
         Data.bulletEffects.Add(effect);
     }
