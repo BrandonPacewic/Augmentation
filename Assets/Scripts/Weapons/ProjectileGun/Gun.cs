@@ -1,6 +1,7 @@
 // Copyright (c) TigardHighGDC
 // SPDX-License SPDX-License-Identifier: Apache-2.0
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,12 @@ public class Gun : MonoBehaviour
     private bool shotDelay = false;
     private int ammoAmount;
     private AudioSource audioPlayer;
+
+    private void awake()
+    {
+        Data.bulletEffects = new List<Action>();
+        Data.weaponEffects = new List<Action>();
+    }
 
     private void Start()
     {
@@ -58,11 +65,16 @@ public class Gun : MonoBehaviour
         // Spawn bullets.
         for (int i = 0; i < Data.BulletPerTrigger; i++)
         {
-            Quaternion eulerAngle = Quaternion.Euler(0, 0, rotation + Random.Range(-Data.Spread, Data.Spread));
+            Quaternion eulerAngle = Quaternion.Euler(0, 0, rotation + UnityEngine.Random.Range(-Data.Spread, Data.Spread));
             GameObject bullet = Instantiate(Bullet, SpawnPoint.position, eulerAngle);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             bullet.GetComponent<Bullet>().Data = Data;
             rb.velocity = bullet.transform.up * Data.BulletSpeed;
+
+            foreach (Action action in Data.weaponEffects)
+            {
+                action();
+            }
         }
     }
 
@@ -86,5 +98,20 @@ public class Gun : MonoBehaviour
         // Yield is required to pause the function.
         yield return new WaitForSeconds(Data.BulletPerSecond);
         shotDelay = false;
+    }
+
+    public void ModifyData(WeaponData newData)
+    {
+        Data = newData;
+    }
+
+    public void addWeaponEffect(Action effect)
+    {
+        Data.weaponEffects.Add(effect);
+    }
+
+    public void addBulletEffect(Action effect)
+    {
+        Data.bulletEffects.Add(effect);
     }
 }

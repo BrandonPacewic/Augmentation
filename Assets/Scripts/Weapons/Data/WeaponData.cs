@@ -1,6 +1,7 @@
 // Copyright (c) TigardHighGDC
 // SPDX-License SPDX-License-Identifier: Apache-2.0
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,4 +21,9 @@ public class WeaponData : ScriptableObject
     public bool AutoReload;
     public AudioClip SoundEffect;
     public float SoundVolume;
+
+    [Header("Effects")]
+    // Effects should have a void return type and no parameters.
+    public List<Action> weaponEffects;
+    public List<Action> bulletEffects;
 }

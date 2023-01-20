@@ -1,6 +1,7 @@
 // Copyright (c) TigardHighGDC
 // SPDX-License SPDX-License-Identifier: Apache-2.0
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,11 @@ public class Bullet : MonoBehaviour
     {
         if (collide.gameObject.tag != "Bullet")
         {
+            foreach (Action action in Data.bulletEffects)
+            {
+                action();
+            }
+
             EnemyHealth enemyHealth = collide.gameObject.GetComponent<EnemyHealth>();
             enemyHealth.Damage(Damage);
             Destroy(collide.gameObject);
