@@ -4,3 +4,6 @@
 [submodule "Assets/AstarPathfindingProject"]
 	path = Assets/AstarPathfindingProject
 	url = https://github.com/TigardHighGDC/AstarPathfindingProject.git
+[submodule "Assets/Scripts/Unity-Reorderable-List"]
+	path = Assets/Scripts/Unity-Reorderable-List
+	url = https://github.com/cfoulston/Unity-Reorderable-List.git
