@@ -276,6 +276,7 @@ MonoBehaviour:
   LineLockedColor:
     serializedVersion: 2
     rgba: 4286611584
+  MapNodes: []
 --- !u!4 &863378859
 Transform:
   m_ObjectHideFlags: 0
@@ -338,7 +339,7 @@ MonoBehaviour:
   LockAfterSelecting: 0
   EnterNodeDelay: 1
   MapManager: {fileID: 1868943014}
-  view: {fileID: 863378858}
+  View: {fileID: 863378858}
 --- !u!1 &1240838948
 GameObject:
   m_ObjectHideFlags: 0
