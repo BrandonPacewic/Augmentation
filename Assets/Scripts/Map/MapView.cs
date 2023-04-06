@@ -78,8 +78,8 @@ public class MapView : MonoBehaviour
         mapParent = new GameObject("MapParentWithAScroll");
         mapParent.transform.SetParent(firstParent.transform);
         var scrollNonUi = mapParent.AddComponent<ScrollNonUI>();
-        scrollNonUi.freezeX = true;
-        scrollNonUi.freezeY = false;
+        scrollNonUi.FreezeX = true;
+        scrollNonUi.FreezeY = false;
         var boxCollider = mapParent.AddComponent<BoxCollider>();
         boxCollider.size = new Vector3(100, 100, 1);
 
@@ -135,8 +135,8 @@ public class MapView : MonoBehaviour
         
         if (scrollNonUi != null)
         {
-            scrollNonUi.yConstraints.max = 0;
-            scrollNonUi.yConstraints.min = -(span + 2.0f * offset);
+            scrollNonUi.YConstraints.max = 0;
+            scrollNonUi.YConstraints.min = -(span + 2.0f * offset);
         }
 
         firstParent.transform.localPosition += new Vector3(0, offset, 0);
@@ -247,12 +247,12 @@ public class MapView : MonoBehaviour
     private NodeBlueprint GetBlueprint(NodeType type)
     {
         var config = GetConfig(MapManager.CurrentMap.ConfigName);
-        return config.nodeBlueprints.FirstOrDefault(n => n.NodeType == type);
+        return config.NodeBlueprints.FirstOrDefault(n => n.NodeType == type);
     }
 
     private NodeBlueprint GetBlueprint(string blueprintName)
     {
         var config = GetConfig(MapManager.CurrentMap.ConfigName);
-        return config.nodeBlueprints.FirstOrDefault(n => n.name == blueprintName);
+        return config.NodeBlueprints.FirstOrDefault(n => n.name == blueprintName);
     }
 }

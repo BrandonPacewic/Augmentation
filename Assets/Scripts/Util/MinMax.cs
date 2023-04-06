@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class IntMinMax
 {
+    // Intentionally ignoring naming conventions to align with Unity packages
     public int min;
     public int max;
 
@@ -30,6 +31,7 @@ public class IntMinMax
 [System.Serializable]
 public class FloatMinMax
 {
+    // Intentionally ignoring naming conventions to align with Unity packages
     public float min;
     public float max;
 

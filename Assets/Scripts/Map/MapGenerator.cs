@@ -37,26 +37,26 @@ public static class MapGenerator
         // Create new layer distances
         layerDistances = new List<float>();
 
-        foreach (var layer in config.layers)
+        foreach (var layer in config.Layers)
         {
-            layerDistances.Add(layer.distanceFromPreviousLayer.GetValue());
+            layerDistances.Add(layer.DistanceFromPreviousLayer.GetValue());
         }
 
         // Create and place new layers
-        for (int i = 0; i < conf.layers.Count; i++) {
-            var layer = config.layers[i];
+        for (int i = 0; i < conf.Layers.Count; i++) {
+            var layer = config.Layers[i];
             var nodesOnThisLayer = new List<Node>();
 
             // offset of this layer to make all the nodes centered:
-            var offset = layer.nodesApartDistance * config.GridWidth / 2.0f;
+            var offset = layer.NodesApartDistance * config.GridWidth / 2.0f;
 
             for (int j = 0; j < config.GridWidth; j++)
             {
-                var nodeType = Random.Range(0.0f, 1.0f) < layer.RandomizeNodes ? GetRandomNode() : layer.nodeType;
-                var blueprintName = config.nodeBlueprints.Where(b => b.NodeType == nodeType).ToList().Random().name;
+                var nodeType = Random.Range(0.0f, 1.0f) < layer.RandomizeNodes ? GetRandomNode() : layer.NodeType;
+                var blueprintName = config.NodeBlueprints.Where(b => b.NodeType == nodeType).ToList().Random().name;
                 var node = new Node(nodeType, blueprintName, new Point(j, i))
                 {
-                    Position = new Vector2(-offset + j * layer.nodesApartDistance, GetDistanceToLayer(i))
+                    Position = new Vector2(-offset + j * layer.NodesApartDistance, GetDistanceToLayer(i))
                 };
                 nodesOnThisLayer.Add(node);
             }
@@ -99,7 +99,7 @@ public static class MapGenerator
         for (int i = 0; i < nodes.Count; i++)
         {
             var list = nodes[i];
-            var layer = config.layers[i];
+            var layer = config.Layers[i];
             var distToNextLayer = (i + 1 >= layerDistances.Count)
                 ? 0.0f
                 : layerDistances[i + 1];
@@ -110,7 +110,7 @@ public static class MapGenerator
                 var xRnd = Random.Range(-1.0f, 1.0f);
                 var yRnd = Random.Range(-1.0f, 1.0f);
 
-                var x = xRnd * layer.nodesApartDistance / 2.0f;
+                var x = xRnd * layer.NodesApartDistance / 2.0f;
                 var y = (yRnd < 0) ? distToPreviousLayer * yRnd / 2.0f : distToNextLayer * yRnd / 2.0f;
 
                 node.Position += new Vector2(x, y) * layer.RandomizePosition;
@@ -132,7 +132,7 @@ public static class MapGenerator
         // Remove paths that cross each other
         for (int i = 0; i < config.GridWidth - 1; ++i)
         {
-            for (int j = 0; j < config.layers.Count - 1; ++j)
+            for (int j = 0; j < config.Layers.Count - 1; ++j)
             {
                 var node = GetNode(new Point(i, j));
                 var right = GetNode(new Point(i + 1, j));
@@ -184,7 +184,7 @@ public static class MapGenerator
         }
 
         var nodesList = nodes.SelectMany(n => n).Where(n => n.Incoming.Count > 0 || n.Outgoing.Count > 0).ToList();
-        var bossNodeName = config.nodeBlueprints.Where(b => b.NodeType == NodeType.Boss).ToList().Random().name;
+        var bossNodeName = config.NodeBlueprints.Where(b => b.NodeType == NodeType.Boss).ToList().Random().name;
 
         return new Map(conf.name, bossNodeName, nodesList, new List<Point>());
     }
@@ -219,7 +219,7 @@ public static class MapGenerator
 
     private static Point GetFinalNode()
     {
-        var y = config.layers.Count - 1;
+        var y = config.Layers.Count - 1;
 
         if (config.GridWidth % 2 == 1)
         {

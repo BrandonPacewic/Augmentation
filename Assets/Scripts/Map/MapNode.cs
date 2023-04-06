@@ -13,7 +13,7 @@ public class MapNode : MonoBehaviour
     public Image Image;
     public SpriteRenderer VisitedSpriteRenderer;
     public Image CircleImage;
-    public Image visitedCircleImage;
+    public Image VisitedCircleImage;
 
     public Node Node { get; private set; }
     public NodeBlueprint Blueprint { get; private set; }
@@ -155,14 +155,14 @@ public class MapNode : MonoBehaviour
 
     public void ShowSwirlAnimation()
     {
-        if (visitedCircleImage == null)
+        if (VisitedCircleImage == null)
         {
             return;
         }
 
         const float fillDuration = 0.3f;
-        visitedCircleImage.fillAmount = 0;
+        VisitedCircleImage.fillAmount = 0;
 
-        DOTween.To(() => visitedCircleImage.fillAmount, x => visitedCircleImage.fillAmount = x, 1f, fillDuration);
+        DOTween.To(() => VisitedCircleImage.fillAmount, x => VisitedCircleImage.fillAmount = x, 1f, fillDuration);
     }
 }

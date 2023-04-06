@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class ScrollNonUI : MonoBehaviour
 {
-    public float tweenBackDuration = 0.3f;
-    public Ease tweenBackEase;
-    public bool freezeX;
-    public FloatMinMax xConstraints = new FloatMinMax();
-    public bool freezeY;
-    public FloatMinMax yConstraints = new FloatMinMax();
+    public float TweenBackDuration = 0.3f;
+    public Ease TweenBackEase;
+    public bool FreezeX;
+    public FloatMinMax XConstraints = new FloatMinMax();
+    public bool FreezeY;
+    public FloatMinMax YConstraints = new FloatMinMax();
 
     private Vector2 offset;
     private Vector3 pointerDisplacement;
@@ -34,8 +34,8 @@ public class ScrollNonUI : MonoBehaviour
 
         var mousePos = MouseInWorldCoords();
         transform.position = new Vector3(
-            (freezeX) ? transform.position.x : mousePos.x - pointerDisplacement.x,
-            (freezeY) ? transform.position.y : mousePos.y - pointerDisplacement.y,
+            (FreezeX) ? transform.position.x : mousePos.x - pointerDisplacement.x,
+            (FreezeY) ? transform.position.y : mousePos.y - pointerDisplacement.y,
             transform.position.z);
     }
 
@@ -61,25 +61,25 @@ public class ScrollNonUI : MonoBehaviour
 
     private void TweenBack()
     {
-        if (freezeY)
+        if (FreezeY)
         {
-            if (transform.localPosition.x >= xConstraints.min && transform.localPosition.x <= xConstraints.max)
+            if (transform.localPosition.x >= XConstraints.min && transform.localPosition.x <= XConstraints.max)
             {
                 return;
             }
 
-            var targetX = (transform.localPosition.x < xConstraints.min) ? xConstraints.min : xConstraints.max;
-            transform.DOLocalMoveX(targetX, tweenBackDuration).SetEase(tweenBackEase);
+            var targetX = (transform.localPosition.x < XConstraints.min) ? XConstraints.min : XConstraints.max;
+            transform.DOLocalMoveX(targetX, TweenBackDuration).SetEase(TweenBackEase);
         }
-        else if (freezeX)
+        else if (FreezeX)
         {
-            if (transform.localPosition.y >= yConstraints.min && transform.localPosition.y <= yConstraints.max)
+            if (transform.localPosition.y >= YConstraints.min && transform.localPosition.y <= YConstraints.max)
             {
                 return;
             }
 
-            var targetY = (transform.localPosition.y < yConstraints.min) ? yConstraints.min : yConstraints.max;
-            transform.DOLocalMoveY(targetY, tweenBackDuration).SetEase(tweenBackEase);
+            var targetY = (transform.localPosition.y < YConstraints.min) ? YConstraints.min : YConstraints.max;
+            transform.DOLocalMoveY(targetY, TweenBackDuration).SetEase(TweenBackEase);
         }
     }
 }

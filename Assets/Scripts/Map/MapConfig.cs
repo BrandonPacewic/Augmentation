@@ -8,7 +8,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class MapConfig : ScriptableObject
 {
-    public List<NodeBlueprint> nodeBlueprints; // TODO: Conform to naming convention
+    public List<NodeBlueprint> NodeBlueprints;
     public int GridWidth => Mathf.Max(numOfPreBossNodes.max, numOfStartingNodes.max);
 
     public int MinPreBossNodes;
@@ -18,7 +18,7 @@ public class MapConfig : ScriptableObject
     public int ExtraPaths;
     
     [Reorderable]
-    public ListOfMapLayers layers; // TODO: Conform to naming convention
+    public ListOfMapLayers Layers;
 
     [System.Serializable]
     public class ListOfMapLayers : ReorderableArray<MapLayer>

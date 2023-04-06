@@ -6,12 +6,12 @@ using UnityEngine;
 [System.Serializable]
 public class MapLayer
 {
-    public NodeType nodeType; // TODO: Conform to naming convention.
+    public NodeType NodeType;
 
     public float MinDistanceFromPreviousLayer = 3.0f;
     public float MaxDistanceFromPreviousLayer = 3.0f;
 
-    public float nodesApartDistance; // TODO: Conform to naming convention.
+    public float NodesApartDistance;
 
     [Range(0.0f, 1.0f)] 
     public float RandomizePosition = 0.0f;
@@ -20,5 +20,5 @@ public class MapLayer
     public float RandomizeNodes = 0.0f;
 
     [HideInInspector]
-    public FloatMinMax distanceFromPreviousLayer => new FloatMinMax(MinDistanceFromPreviousLayer, MaxDistanceFromPreviousLayer);
+    public FloatMinMax DistanceFromPreviousLayer => new FloatMinMax(MinDistanceFromPreviousLayer, MaxDistanceFromPreviousLayer);
 }
