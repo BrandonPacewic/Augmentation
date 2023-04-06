@@ -6,22 +6,47 @@ using UnityEngine;
 [System.Serializable]
 public class IntMinMax
 {
-    public int Min;
-    public int Max;
+    public int min;
+    public int max;
+
+    public IntMinMax()
+    {
+        min = 0;
+        max = 0;
+    }
+
+    public IntMinMax(int min, int max)
+    {
+        this.min = min;
+        this.max = max;
+    }
 
     public int GetValue()
     {
-        return Random.Range(Min, Max + 1);
+        return Random.Range(min, max + 1);
     }
 }
 
+[System.Serializable]
 public class FloatMinMax
 {
-    public float Min;
-    public float Max;
+    public float min;
+    public float max;
+
+    public FloatMinMax()
+    {
+        min = 0;
+        max = 0;
+    }
+
+    public FloatMinMax(float min, float max)
+    {
+        this.min = min;
+        this.max = max;
+    }
 
     public float GetValue()
     {
-        return Random.Range(Min, Max);
+        return Random.Range(min, max);
     }
 }
