@@ -1,24 +1,24 @@
-﻿using UnityEngine;
+﻿// Copyright (c) TigardHighGDC
+// SPDX-License SPDX-License-Identifier: Apache-2.0
 
-namespace Map
+using UnityEngine;
+
+[System.Serializable]
+public class MapLayer
 {
-    [System.Serializable]
-    public class MapLayer
-    {
-        [Tooltip("Default node for this map layer. If Randomize Nodes is 0, you will get this node 100% of the time")]
-        public NodeType nodeType;
+    public NodeType nodeType; // TODO: Conform to naming convention.
 
-        public float MinDistanceFromPreviousLayer;
-        public float MaxDistanceFromPreviousLayer;
+    public float MinDistanceFromPreviousLayer = 3.0f;
+    public float MaxDistanceFromPreviousLayer = 3.0f;
 
-        [Tooltip("Distance between the nodes on this layer")]
-        public float nodesApartDistance;
-        [Tooltip("If this is set to 0, nodes on this layer will appear in a straight line. Closer to 1f = more position randomization")]
-        [Range(0f, 1f)] public float randomizePosition;
-        [Tooltip("Chance to get a random node that is different from the default node on this layer")]
-        [Range(0f, 1f)] public float randomizeNodes;
+    public float nodesApartDistance; // TODO: Conform to naming convention.
 
-        [HideInInspector]
-        public FloatMinMax distanceFromPreviousLayer => new FloatMinMax(MinDistanceFromPreviousLayer, MaxDistanceFromPreviousLayer);
-    }
+    [Range(0.0f, 1.0f)] 
+    public float RandomizePosition = 0.0f;
+
+    [Range(0.0f, 1.0f)]
+    public float RandomizeNodes = 0.0f;
+
+    [HideInInspector]
+    public FloatMinMax distanceFromPreviousLayer => new FloatMinMax(MinDistanceFromPreviousLayer, MaxDistanceFromPreviousLayer);
 }

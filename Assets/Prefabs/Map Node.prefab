@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c646e21cef505124ca3f38d59921b4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 8183673591436601403}
+  SpriteRenderer: {fileID: 8183673591436601403}
   image: {fileID: 0}
   visitedCircle: {fileID: 0}
   circleImage: {fileID: 0}

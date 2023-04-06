@@ -1,57 +1,58 @@
+// Copyright (c) TigardHighGDC
+// SPDX-License SPDX-License-Identifier: Apache-2.0
+
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using UnityEngine;
 
-namespace Map
+public class Node
 {
-    public class Node
+    public Point Point;
+    public List<Point> Incoming = new List<Point>();
+    public List<Point> Outgoing = new List<Point>();
+
+    [JsonConverter(typeof(StringEnumConverter))]
+    public NodeType NodeType;
+    public string BlueprintName;
+    public Vector2 Position;
+
+    public Node(NodeType nodeType, string blueprintName, Point point)
     {
-        public readonly Point point;
-        public readonly List<Point> incoming = new List<Point>();
-        public readonly List<Point> outgoing = new List<Point>();
-        [JsonConverter(typeof(StringEnumConverter))]
-        public readonly NodeType nodeType;
-        public readonly string blueprintName;
-        public Vector2 position;
+        NodeType = nodeType;
+        BlueprintName = blueprintName;
+        Point = point;
+    }
 
-        public Node(NodeType nodeType, string blueprintName, Point point)
+    public void AddIncoming(Point point)
+    {
+        if (!Incoming.Any(element => element.Equals(point)))
         {
-            this.nodeType = nodeType;
-            this.blueprintName = blueprintName;
-            this.point = point;
+            Incoming.Add(point);
         }
+    }
 
-        public void AddIncoming(Point p)
+    public void AddOutgoing(Point point)
+    {
+        if (!Outgoing.Any(element => element.Equals(point)))
         {
-            if (incoming.Any(element => element.Equals(p)))
-                return;
-
-            incoming.Add(p);
+            Outgoing.Add(point);
         }
+    }
 
-        public void AddOutgoing(Point p)
-        {
-            if (outgoing.Any(element => element.Equals(p)))
-                return;
+    public void RemoveIncoming(Point point)
+    {
+        Incoming.RemoveAll(element => element.Equals(point));
+    }
 
-            outgoing.Add(p);
-        }
+    public void RemoveOutgoing(Point point)
+    {
+        Outgoing.RemoveAll(element => element.Equals(point));
+    }
 
-        public void RemoveIncoming(Point p)
-        {
-            incoming.RemoveAll(element => element.Equals(p));
-        }
-
-        public void RemoveOutgoing(Point p)
-        {
-            outgoing.RemoveAll(element => element.Equals(p));
-        }
-
-        public bool HasNoConnections()
-        {
-            return incoming.Count == 0 && outgoing.Count == 0;
-        }
+    public bool HasNoConnections()
+    {
+        return Incoming.Count == 0 && Outgoing.Count == 0;
     }
 }

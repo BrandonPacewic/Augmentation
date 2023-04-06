@@ -1,40 +1,45 @@
-﻿using UnityEngine;
+﻿// Copyright (c) TigardHighGDC
+// SPDX-License SPDX-License-Identifier: Apache-2.0
+
+using UnityEngine;
 using UnityEngine.UI.Extensions;
 
-namespace Map
+[System.Serializable]
+public class LineConnection
 {
-    [System.Serializable]
-    public class LineConnection
-    {
-        public LineRenderer lr;
-        public UILineRenderer uilr; 
-        public MapNode from;
-        public MapNode to;
+    public LineRenderer LineRenderer;
+    public UILineRenderer UILineRenderer; 
+    public MapNode from;
+    public MapNode to;
 
-        public LineConnection(LineRenderer lr, UILineRenderer uilr, MapNode from, MapNode to)
+    public LineConnection(LineRenderer lr, UILineRenderer uilr, MapNode from, MapNode to)
+    {
+        LineRenderer = lr;
+        UILineRenderer = uilr;
+        this.from = from;
+        this.to = to;
+    }
+
+    public void SetColor(Color color)
+    {
+        if (LineRenderer == null)
         {
-            this.lr = lr;
-            this.uilr = uilr;
-            this.from = from;
-            this.to = to;
+            return;
         }
 
-        public void SetColor(Color color)
+        var gradient = LineRenderer.colorGradient;
+        var colorKeys = gradient.colorKeys;
+
+        for (int i = 0; i < colorKeys.Length; i++)
         {
-            if (lr != null)
-            {
-                var gradient = lr.colorGradient;
-                var colorKeys = gradient.colorKeys;
-                for (var j = 0; j < colorKeys.Length; j++)
-                {
-                    colorKeys[j].color = color;
-                }
+            colorKeys[i].color = color;
+        }
 
-                gradient.colorKeys = colorKeys;
-                lr.colorGradient = gradient;
-            }
+        gradient.colorKeys = colorKeys;
+        LineRenderer.colorGradient = gradient;
 
-            if (uilr != null) uilr.color = color;
+        if (UILineRenderer != null) {
+            UILineRenderer.color = color;
         }
     }
 }

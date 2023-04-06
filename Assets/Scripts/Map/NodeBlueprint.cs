@@ -1,25 +1,11 @@
-﻿using UnityEngine;
+﻿// Copyright (c) TigardHighGDC
+// SPDX-License SPDX-License-Identifier: Apache-2.0
 
-namespace Map
-{
-    public enum NodeType
-    {
-        MinorEnemy,
-        EliteEnemy,
-        RestSite,
-        Treasure,
-        Store,
-        Boss,
-        Mystery
-    }
-}
+using UnityEngine;
 
-namespace Map
+[CreateAssetMenu]
+public class NodeBlueprint : ScriptableObject
 {
-    [CreateAssetMenu]
-    public class NodeBlueprint : ScriptableObject
-    {
-        public Sprite sprite;
-        public NodeType nodeType;
-    }
+    public Sprite sprite;
+    public NodeType nodeType;
 }

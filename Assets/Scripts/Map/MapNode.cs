@@ -1,147 +1,168 @@
-﻿using System;
+﻿// Copyright (c) TigardHighGDC
+// SPDX-License SPDX-License-Identifier: Apache-2.0
+
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Map
+public class MapNode : MonoBehaviour
 {
-    public enum NodeStates
+    public SpriteRenderer SpriteRenderer;
+    public Image Image;
+    public SpriteRenderer VisitedSpriteRenderer;
+    public Image CircleImage;
+    public Image visitedCircleImage;
+
+    public Node Node { get; private set; }
+    public NodeBlueprint Blueprint { get; private set; }
+
+    private float initialScale;
+    private const float HoverScaleFactor = 1.2f;
+    private float mouseDownTime;
+
+    private const float MaxClickDuration = 0.5f;
+
+    public void SetUp(Node node, NodeBlueprint blueprint)
     {
-        Locked,
-        Visited,
-        Attainable
+        Node = node;
+        Blueprint = blueprint;
+
+        if (SpriteRenderer != null)
+        {
+            SpriteRenderer.sprite = blueprint.sprite;
+        } 
+
+        if (Image != null)
+        {
+            Image.sprite = blueprint.sprite;
+        }
+
+        if (node.NodeType == NodeType.Boss)
+        {
+            transform.localScale *= 1.5f;
+        }
+
+        if (SpriteRenderer != null)
+        {
+            initialScale = SpriteRenderer.transform.localScale.x;
+        }
+
+        if (Image != null)
+        {
+            initialScale = Image.transform.localScale.x;
+        }
+
+        if (VisitedSpriteRenderer != null)
+        {
+            VisitedSpriteRenderer.color = MapView.Instance.VisitedColor;
+            VisitedSpriteRenderer.gameObject.SetActive(false);
+        }
+
+        if (CircleImage != null)
+        {
+            CircleImage.color = MapView.Instance.VisitedColor;
+            CircleImage.gameObject.SetActive(false);    
+        }
+        
+        SetState(NodeStates.Locked);
     }
-}
 
-namespace Map
-{
-    public class MapNode : MonoBehaviour
+    public void SetState(NodeStates state)
     {
-        public SpriteRenderer sr;
-        public Image image;
-        public SpriteRenderer visitedCircle;
-        public Image circleImage;
-        public Image visitedCircleImage;
-
-        public Node Node { get; private set; }
-        public NodeBlueprint Blueprint { get; private set; }
-
-        private float initialScale;
-        private const float HoverScaleFactor = 1.2f;
-        private float mouseDownTime;
-
-        private const float MaxClickDuration = 0.5f;
-
-        public void SetUp(Node node, NodeBlueprint blueprint)
+        if (VisitedSpriteRenderer != null)
         {
-            Node = node;
-            Blueprint = blueprint;
-            if (sr != null) sr.sprite = blueprint.sprite;
-            if (image != null) image.sprite = blueprint.sprite;
-            if (node.nodeType == NodeType.Boss) transform.localScale *= 1.5f;
-            if (sr != null) initialScale = sr.transform.localScale.x;
-            if (image != null) initialScale = image.transform.localScale.x;
-
-            if (visitedCircle != null)
-            {
-                visitedCircle.color = MapView.Instance.visitedColor;
-                visitedCircle.gameObject.SetActive(false);
-            }
-
-            if (circleImage != null)
-            {
-                circleImage.color = MapView.Instance.visitedColor;
-                circleImage.gameObject.SetActive(false);    
-            }
-            
-            SetState(NodeStates.Locked);
+            VisitedSpriteRenderer.gameObject.SetActive(false);
         }
 
-        public void SetState(NodeStates state)
+        if (CircleImage != null)
         {
-            if (visitedCircle != null) visitedCircle.gameObject.SetActive(false);
-            if (circleImage != null) circleImage.gameObject.SetActive(false);
-            
-            switch (state)
-            {
-                case NodeStates.Locked:
-                    if (sr != null)
-                    {
-                        sr.DOKill();
-                        sr.color = MapView.Instance.lockedColor;
-                    }
-
-                    if (image != null)
-                    {
-                        image.DOKill();
-                        image.color = MapView.Instance.lockedColor;
-                    }
-
-                    break;
-                case NodeStates.Visited:
-                    if (sr != null)
-                    {
-                        sr.DOKill();
-                        sr.color = MapView.Instance.visitedColor;
-                    }
-                    
-                    if (image != null)
-                    {
-                        image.DOKill();
-                        image.color = MapView.Instance.visitedColor;
-                    }
-                    
-                    if (visitedCircle != null) visitedCircle.gameObject.SetActive(true);
-                    if (circleImage != null) circleImage.gameObject.SetActive(true);
-                    break;
-                case NodeStates.Attainable:
-                    // start pulsating from visited to locked color:
-                    if (sr != null)
-                    {
-                        sr.color = MapView.Instance.lockedColor;
-                        sr.DOKill();
-                        sr.DOColor(MapView.Instance.visitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
-                    }
-                    
-                    if (image != null)
-                    {
-                        image.color = MapView.Instance.lockedColor;
-                        image.DOKill();
-                        image.DOColor(MapView.Instance.visitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
-                    }
-                    
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
-            }
+            CircleImage.gameObject.SetActive(false);
         }
 
-        public void OnMouseDown()
+        switch (state)
         {
-            Debug.Log("OnPointerDown");
-            mouseDownTime = Time.time;
+            case NodeStates.Locked:
+                if (SpriteRenderer != null)
+                {
+                    SpriteRenderer.DOKill();
+                    SpriteRenderer.color = MapView.Instance.LockedColor;
+                }
+
+                if (Image != null)
+                {
+                    Image.DOKill();
+                    Image.color = MapView.Instance.LockedColor;
+                }
+                break;
+            case NodeStates.Visited:
+                if (SpriteRenderer != null)
+                {
+                    SpriteRenderer.DOKill();
+                    SpriteRenderer.color = MapView.Instance.VisitedColor;
+                }
+                
+                if (Image != null)
+                {
+                    Image.DOKill();
+                    Image.color = MapView.Instance.VisitedColor;
+                }
+                
+                if (VisitedSpriteRenderer != null)
+                {
+                    VisitedSpriteRenderer.gameObject.SetActive(true);
+                }
+
+                if (CircleImage != null)
+                {
+                    CircleImage.gameObject.SetActive(true);
+                }
+                break;
+            case NodeStates.Attainable:
+                if (SpriteRenderer != null)
+                {
+                    SpriteRenderer.color = MapView.Instance.LockedColor;
+                    SpriteRenderer.DOKill();
+                    SpriteRenderer.DOColor(MapView.Instance.VisitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
+                }
+                
+                if (Image != null)
+                {
+                    Image.color = MapView.Instance.LockedColor;
+                    Image.DOKill();
+                    Image.DOColor(MapView.Instance.VisitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
+                }
+                break;
+            default:
+                Assert.Boolean(false, "Unhandled node state: " + state);
+                break; // Will not be reached
+        }
+    }
+
+    public void OnMouseDown()
+    {
+        mouseDownTime = Time.time;
+    }
+
+    public void OnMouseUp()
+    {
+        if (Time.time - mouseDownTime < MaxClickDuration)
+        {
+            MapPlayerTracker.Instance.SelectNode(this);
+        }
+    }
+
+    public void ShowSwirlAnimation()
+    {
+        if (visitedCircleImage == null)
+        {
+            return;
         }
 
-        public void OnMouseUp()
-        {
-            Debug.Log("OnPointerUp");
-            if (Time.time - mouseDownTime < MaxClickDuration)
-            {
-                // user clicked on this node:
-                MapPlayerTracker.Instance.SelectNode(this);
-            }
-        }
+        const float fillDuration = 0.3f;
+        visitedCircleImage.fillAmount = 0;
 
-        public void ShowSwirlAnimation()
-        {
-            if (visitedCircleImage == null)
-                return;
-
-            const float fillDuration = 0.3f;
-            visitedCircleImage.fillAmount = 0;
-
-            DOTween.To(() => visitedCircleImage.fillAmount, x => visitedCircleImage.fillAmount = x, 1f, fillDuration);
-        }
+        DOTween.To(() => visitedCircleImage.fillAmount, x => visitedCircleImage.fillAmount = x, 1f, fillDuration);
     }
 }
