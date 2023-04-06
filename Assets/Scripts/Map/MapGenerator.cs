@@ -43,7 +43,8 @@ public static class MapGenerator
         }
 
         // Create and place new layers
-        for (int i = 0; i < conf.Layers.Count; i++) {
+        for (int i = 0; i < conf.Layers.Count; i++)
+        {
             var layer = config.Layers[i];
             var nodesOnThisLayer = new List<Node>();
 
@@ -54,8 +55,7 @@ public static class MapGenerator
             {
                 var nodeType = Random.Range(0.0f, 1.0f) < layer.RandomizeNodes ? GetRandomNode() : layer.NodeType;
                 var blueprintName = config.NodeBlueprints.Where(b => b.NodeType == nodeType).ToList().Random().name;
-                var node = new Node(nodeType, blueprintName, new Point(j, i))
-                {
+                var node = new Node(nodeType, blueprintName, new Point(j, i)) {
                     Position = new Vector2(-offset + j * layer.NodesApartDistance, GetDistanceToLayer(i))
                 };
                 nodesOnThisLayer.Add(node);
@@ -100,9 +100,7 @@ public static class MapGenerator
         {
             var list = nodes[i];
             var layer = config.Layers[i];
-            var distToNextLayer = (i + 1 >= layerDistances.Count)
-                ? 0.0f
-                : layerDistances[i + 1];
+            var distToNextLayer = (i + 1 >= layerDistances.Count) ? 0.0f : layerDistances[i + 1];
             var distToPreviousLayer = layerDistances[i];
 
             foreach (var node in list)
@@ -139,15 +137,13 @@ public static class MapGenerator
                 var top = GetNode(new Point(i, j + 1));
                 var topRight = GetNode(new Point(i + 1, j + 1));
 
-                if (
-                    (node == null || node.HasNoConnections()) || (right == null || right.HasNoConnections()) ||
+                if ((node == null || node.HasNoConnections()) || (right == null || right.HasNoConnections()) ||
                     (top == null || top.HasNoConnections()) || (topRight == null || topRight.HasNoConnections()))
                 {
                     continue;
                 }
 
-                if (!node.Outgoing.Any(e => e.Equals(topRight.Point)) ||
-                    !right.Outgoing.Any(e => e.Equals(top.Point)))
+                if (!node.Outgoing.Any(e => e.Equals(topRight.Point)) || !right.Outgoing.Any(e => e.Equals(top.Point)))
                 {
                     continue;
                 }
@@ -194,11 +190,11 @@ public static class MapGenerator
         if (layerIndex < 0 || layerIndex > layerDistances.Count)
         {
             return 0.0f;
-        } 
+        }
         else
         {
             return layerDistances.Take(layerIndex + 1).Sum();
-        } 
+        }
     }
 
     private static Node GetNode(Point p)
@@ -226,9 +222,7 @@ public static class MapGenerator
             return new Point(config.GridWidth / 2, y);
         }
 
-        return (Random.Range(0, 2) == 0)
-            ? new Point(config.GridWidth / 2, y)
-            : new Point(config.GridWidth / 2 - 1, y);
+        return (Random.Range(0, 2) == 0) ? new Point(config.GridWidth / 2, y) : new Point(config.GridWidth / 2 - 1, y);
     }
 
     // Generates a random path bottom up

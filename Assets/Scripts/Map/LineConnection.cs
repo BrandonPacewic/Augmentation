@@ -8,7 +8,7 @@ using UnityEngine.UI.Extensions;
 public class LineConnection
 {
     public LineRenderer LineRenderer;
-    public UILineRenderer UILineRenderer; 
+    public UILineRenderer UILineRenderer;
     public MapNode From;
     public MapNode To;
 
@@ -38,7 +38,8 @@ public class LineConnection
         gradient.colorKeys = colorKeys;
         LineRenderer.colorGradient = gradient;
 
-        if (UILineRenderer != null) {
+        if (UILineRenderer != null)
+        {
             UILineRenderer.color = color;
         }
     }

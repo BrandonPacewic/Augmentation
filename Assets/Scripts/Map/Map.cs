@@ -45,9 +45,8 @@ public class Map
 
     public string ToJson()
     {
-        return JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings
-        {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        });
+        return JsonConvert.SerializeObject(
+            this, Formatting.Indented,
+            new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
     }
 }

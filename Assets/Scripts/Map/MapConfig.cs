@@ -16,7 +16,7 @@ public class MapConfig : ScriptableObject
     public int MinStartingNodes;
     public int MaxStartingNodes;
     public int ExtraPaths;
-    
+
     [Reorderable]
     public ListOfMapLayers Layers;
 

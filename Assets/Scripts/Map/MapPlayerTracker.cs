@@ -73,23 +73,23 @@ public class MapPlayerTracker : MonoBehaviour
     {
         switch (mapNode.Node.NodeType)
         {
-            case NodeType.MinorEnemy:
-                break;
-            case NodeType.EliteEnemy:
-                break;
-            case NodeType.RestSite:
-                break;
-            case NodeType.Treasure:
-                break;
-            case NodeType.Store:
-                break;
-            case NodeType.Boss:
-                break;
-            case NodeType.Mystery:
-                break;
-            default:
-                Assert.Boolean(false, "Unknown NodeType: " + mapNode.Node.NodeType);
-                break; // Will not be reached
+        case NodeType.MinorEnemy:
+            break;
+        case NodeType.EliteEnemy:
+            break;
+        case NodeType.RestSite:
+            break;
+        case NodeType.Treasure:
+            break;
+        case NodeType.Store:
+            break;
+        case NodeType.Boss:
+            break;
+        case NodeType.Mystery:
+            break;
+        default:
+            Assert.Boolean(false, "Unknown NodeType: " + mapNode.Node.NodeType);
+            break; // Will not be reached
         }
     }
 }

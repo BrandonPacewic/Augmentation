@@ -51,8 +51,9 @@ public class MapManager : MonoBehaviour
             return;
         }
 
-        var json = JsonConvert.SerializeObject(CurrentMap, Formatting.Indented,
-            new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+        var json = JsonConvert.SerializeObject(
+            CurrentMap, Formatting.Indented,
+            new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
         PlayerPrefs.SetString("Map", json);
         PlayerPrefs.Save();
     }

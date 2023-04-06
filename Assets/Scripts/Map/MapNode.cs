@@ -32,7 +32,7 @@ public class MapNode : MonoBehaviour
         if (SpriteRenderer != null)
         {
             SpriteRenderer.sprite = blueprint.Sprite;
-        } 
+        }
 
         if (Image != null)
         {
@@ -63,9 +63,9 @@ public class MapNode : MonoBehaviour
         if (CircleImage != null)
         {
             CircleImage.color = MapView.Instance.VisitedColor;
-            CircleImage.gameObject.SetActive(false);    
+            CircleImage.gameObject.SetActive(false);
         }
-        
+
         SetState(NodeStates.Locked);
     }
 
@@ -83,60 +83,60 @@ public class MapNode : MonoBehaviour
 
         switch (state)
         {
-            case NodeStates.Locked:
-                if (SpriteRenderer != null)
-                {
-                    SpriteRenderer.DOKill();
-                    SpriteRenderer.color = MapView.Instance.LockedColor;
-                }
+        case NodeStates.Locked:
+            if (SpriteRenderer != null)
+            {
+                SpriteRenderer.DOKill();
+                SpriteRenderer.color = MapView.Instance.LockedColor;
+            }
 
-                if (Image != null)
-                {
-                    Image.DOKill();
-                    Image.color = MapView.Instance.LockedColor;
-                }
-                break;
-            case NodeStates.Visited:
-                if (SpriteRenderer != null)
-                {
-                    SpriteRenderer.DOKill();
-                    SpriteRenderer.color = MapView.Instance.VisitedColor;
-                }
-                
-                if (Image != null)
-                {
-                    Image.DOKill();
-                    Image.color = MapView.Instance.VisitedColor;
-                }
-                
-                if (VisitedSpriteRenderer != null)
-                {
-                    VisitedSpriteRenderer.gameObject.SetActive(true);
-                }
+            if (Image != null)
+            {
+                Image.DOKill();
+                Image.color = MapView.Instance.LockedColor;
+            }
+            break;
+        case NodeStates.Visited:
+            if (SpriteRenderer != null)
+            {
+                SpriteRenderer.DOKill();
+                SpriteRenderer.color = MapView.Instance.VisitedColor;
+            }
 
-                if (CircleImage != null)
-                {
-                    CircleImage.gameObject.SetActive(true);
-                }
-                break;
-            case NodeStates.Attainable:
-                if (SpriteRenderer != null)
-                {
-                    SpriteRenderer.color = MapView.Instance.LockedColor;
-                    SpriteRenderer.DOKill();
-                    SpriteRenderer.DOColor(MapView.Instance.VisitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
-                }
-                
-                if (Image != null)
-                {
-                    Image.color = MapView.Instance.LockedColor;
-                    Image.DOKill();
-                    Image.DOColor(MapView.Instance.VisitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
-                }
-                break;
-            default:
-                Assert.Boolean(false, "Unhandled node state: " + state);
-                break; // Will not be reached
+            if (Image != null)
+            {
+                Image.DOKill();
+                Image.color = MapView.Instance.VisitedColor;
+            }
+
+            if (VisitedSpriteRenderer != null)
+            {
+                VisitedSpriteRenderer.gameObject.SetActive(true);
+            }
+
+            if (CircleImage != null)
+            {
+                CircleImage.gameObject.SetActive(true);
+            }
+            break;
+        case NodeStates.Attainable:
+            if (SpriteRenderer != null)
+            {
+                SpriteRenderer.color = MapView.Instance.LockedColor;
+                SpriteRenderer.DOKill();
+                SpriteRenderer.DOColor(MapView.Instance.VisitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
+            }
+
+            if (Image != null)
+            {
+                Image.color = MapView.Instance.LockedColor;
+                Image.DOKill();
+                Image.DOColor(MapView.Instance.VisitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
+            }
+            break;
+        default:
+            Assert.Boolean(false, "Unhandled node state: " + state);
+            break; // Will not be reached
         }
     }
 

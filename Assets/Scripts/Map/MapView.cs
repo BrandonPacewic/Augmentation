@@ -13,7 +13,7 @@ public class MapView : MonoBehaviour
 
     public List<MapConfig> AllMapConfigs;
     public GameObject NodePrefab;
-    
+
     public float OrientationOffset;
 
     [Header("Background Settings")]
@@ -84,9 +84,10 @@ public class MapView : MonoBehaviour
         boxCollider.size = new Vector3(100, 100, 1);
 
         // Instantiate each node
-        foreach(var node in m.Nodes)
+        foreach (var node in m.Nodes)
         {
-            // For each node the object and blueprint must be instantiated even though they will be an exact copy in the beginning
+            // For each node the object and blueprint must be instantiated even though they will be an exact copy in the
+            // beginning
             var mapNodeObject = Instantiate(NodePrefab, mapParent.transform);
             var mapNode = mapNodeObject.GetComponent<MapNode>();
             var blueprint = GetBlueprint(node.BlueprintName);
@@ -109,7 +110,7 @@ public class MapView : MonoBehaviour
                                     (to.transform.position - node.transform.position).normalized * OffsetFromNodes;
 
                     var toPoint = to.transform.position +
-                                    (node.transform.position - to.transform.position).normalized * OffsetFromNodes;
+                                  (node.transform.position - to.transform.position).normalized * OffsetFromNodes;
 
                     lineObject.transform.position = fromPoint;
                     lineRenderer.useWorldSpace = false;
@@ -118,8 +119,8 @@ public class MapView : MonoBehaviour
 
                     for (int i = 0; i < LinePointsCount; i++)
                     {
-                        lineRenderer.SetPosition(i,
-                            Vector3.Lerp(Vector3.zero, toPoint - fromPoint, (float)i / (LinePointsCount - 1)));
+                        lineRenderer.SetPosition(
+                            i, Vector3.Lerp(Vector3.zero, toPoint - fromPoint, (float)i / (LinePointsCount - 1)));
                     }
 
                     lineConnections.Add(new LineConnection(lineRenderer, null, node, to));
@@ -132,7 +133,7 @@ public class MapView : MonoBehaviour
         var bossNode = MapNodes.FirstOrDefault(node => node.Node.NodeType == NodeType.Boss);
         firstParent.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, 0.0f);
         var offset = OrientationOffset;
-        
+
         if (scrollNonUi != null)
         {
             scrollNonUi.YConstraints.max = 0;
@@ -148,7 +149,8 @@ public class MapView : MonoBehaviour
         {
             var backgroundObject = new GameObject("Background");
             backgroundObject.transform.SetParent(mapParent.transform);
-            backgroundObject.transform.localPosition = new Vector3(bossNode.transform.localPosition.x, span / 2.0f, 0.0f);
+            backgroundObject.transform.localPosition =
+                new Vector3(bossNode.transform.localPosition.x, span / 2.0f, 0.0f);
             backgroundObject.transform.localRotation = Quaternion.identity;
             var sr = backgroundObject.AddComponent<SpriteRenderer>();
             sr.color = BackgroundColor;
@@ -222,7 +224,8 @@ public class MapView : MonoBehaviour
             lineConnection?.SetColor(LineVisitedColor);
         }
 
-        if (MapManager.CurrentMap.Path.Count <= 1) return;
+        if (MapManager.CurrentMap.Path.Count <= 1)
+            return;
 
         for (var i = 0; i < MapManager.CurrentMap.Path.Count - 1; i++)
         {

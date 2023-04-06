@@ -33,10 +33,9 @@ public class ScrollNonUI : MonoBehaviour
         }
 
         var mousePos = MouseInWorldCoords();
-        transform.position = new Vector3(
-            (FreezeX) ? transform.position.x : mousePos.x - pointerDisplacement.x,
-            (FreezeY) ? transform.position.y : mousePos.y - pointerDisplacement.y,
-            transform.position.z);
+        transform.position =
+            new Vector3((FreezeX) ? transform.position.x : mousePos.x - pointerDisplacement.x,
+                        (FreezeY) ? transform.position.y : mousePos.y - pointerDisplacement.y, transform.position.z);
     }
 
     public void OnMouseDown()

@@ -13,12 +13,13 @@ public class MapLayer
 
     public float NodesApartDistance;
 
-    [Range(0.0f, 1.0f)] 
+    [Range(0.0f, 1.0f)]
     public float RandomizePosition = 0.0f;
 
     [Range(0.0f, 1.0f)]
     public float RandomizeNodes = 0.0f;
 
     [HideInInspector]
-    public FloatMinMax DistanceFromPreviousLayer => new FloatMinMax(MinDistanceFromPreviousLayer, MaxDistanceFromPreviousLayer);
+    public FloatMinMax DistanceFromPreviousLayer =>
+        new FloatMinMax(MinDistanceFromPreviousLayer, MaxDistanceFromPreviousLayer);
 }
