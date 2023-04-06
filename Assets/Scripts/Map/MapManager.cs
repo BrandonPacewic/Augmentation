@@ -48,7 +48,10 @@ public class MapManager : MonoBehaviour
 
     public void SaveMap()
     {
-        if (CurrentMap == null) return;
+        if (CurrentMap == null)
+        {
+            return;
+        }
 
         var json = JsonConvert.SerializeObject(CurrentMap, Formatting.Indented,
             new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});

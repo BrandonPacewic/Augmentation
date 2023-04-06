@@ -11,7 +11,7 @@ public class MapPlayerTracker : MonoBehaviour
     public bool LockAfterSelecting = false;
     public float EnterNodeDelay = 1.0f;
     public MapManager MapManager;
-    public MapView view;
+    public MapView View;
 
     public static MapPlayerTracker Instance;
 
@@ -32,7 +32,7 @@ public class MapPlayerTracker : MonoBehaviour
 
         if (MapManager.CurrentMap.Path.Count == 0)
         {
-            if (mapNode.Node.Point.y == 0)
+            if (mapNode.Node.Point.Y == 0)
             {
                 SendPlayerToNode(mapNode);
             }
@@ -62,8 +62,8 @@ public class MapPlayerTracker : MonoBehaviour
         Locked = LockAfterSelecting;
         MapManager.CurrentMap.Path.Add(mapNode.Node.Point);
         MapManager.SaveMap();
-        view.SetAttainableNodes();
-        view.SetLineColors();
+        View.SetLineColors();
+        View.SetAttainableNodes();
         mapNode.ShowSwirlAnimation();
 
         DOTween.Sequence().AppendInterval(EnterNodeDelay).OnComplete(() => EnterNode(mapNode));

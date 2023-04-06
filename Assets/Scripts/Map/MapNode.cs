@@ -31,12 +31,12 @@ public class MapNode : MonoBehaviour
 
         if (SpriteRenderer != null)
         {
-            SpriteRenderer.sprite = blueprint.sprite;
+            SpriteRenderer.sprite = blueprint.Sprite;
         } 
 
         if (Image != null)
         {
-            Image.sprite = blueprint.sprite;
+            Image.sprite = blueprint.Sprite;
         }
 
         if (node.NodeType == NodeType.Boss)

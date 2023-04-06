@@ -28,7 +28,7 @@ public class Map
     public float DistanceBetweenFirstAndLastLayers()
     {
         var bossNode = GetBossNode();
-        var firstLayerNode = Nodes.FirstOrDefault(n => n.Point.y == 0);
+        var firstLayerNode = Nodes.FirstOrDefault(n => n.Point.Y == 0);
 
         if (bossNode == null || firstLayerNode == null)
         {

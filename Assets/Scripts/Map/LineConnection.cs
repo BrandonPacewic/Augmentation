@@ -9,15 +9,15 @@ public class LineConnection
 {
     public LineRenderer LineRenderer;
     public UILineRenderer UILineRenderer; 
-    public MapNode from;
-    public MapNode to;
+    public MapNode From;
+    public MapNode To;
 
     public LineConnection(LineRenderer lr, UILineRenderer uilr, MapNode from, MapNode to)
     {
         LineRenderer = lr;
         UILineRenderer = uilr;
-        this.from = from;
-        this.to = to;
+        From = from;
+        To = to;
     }
 
     public void SetColor(Color color)

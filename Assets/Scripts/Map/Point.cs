@@ -5,13 +5,13 @@ using System;
 
 public class Point : IEquatable<Point>
 {
-    public int x;
-    public int y;
+    public int X;
+    public int Y;
 
     public Point(int x, int y)
     {
-        this.x = x;
-        this.y = y;
+        X = x;
+        Y = y;
     }
 
     public bool Equals(Point other)
@@ -26,7 +26,7 @@ public class Point : IEquatable<Point>
         }
         else
         {
-            return x == other.x && y == other.y;
+            return X == other.X && Y == other.Y;
         }
     }
 }

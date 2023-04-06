@@ -53,7 +53,7 @@ public static class MapGenerator
             for (int j = 0; j < config.GridWidth; j++)
             {
                 var nodeType = Random.Range(0.0f, 1.0f) < layer.RandomizeNodes ? GetRandomNode() : layer.nodeType;
-                var blueprintName = config.nodeBlueprints.Where(b => b.nodeType == nodeType).ToList().Random().name;
+                var blueprintName = config.nodeBlueprints.Where(b => b.NodeType == nodeType).ToList().Random().name;
                 var node = new Node(nodeType, blueprintName, new Point(j, i))
                 {
                     Position = new Vector2(-offset + j * layer.nodesApartDistance, GetDistanceToLayer(i))
@@ -82,7 +82,7 @@ public static class MapGenerator
 
         candidateXs.Shuffle();
         var preBossXs = candidateXs.Take(numOfPreBossNodes);
-        var preBossPoints = (from x in preBossXs select new Point(x, finalNode.y - 1)).ToList();
+        var preBossPoints = (from x in preBossXs select new Point(x, finalNode.Y - 1)).ToList();
 
         int numOfPaths = Mathf.Max(numOfStartingNodes, numOfPreBossNodes) + Mathf.Max(0, config.ExtraPaths);
 
@@ -184,7 +184,7 @@ public static class MapGenerator
         }
 
         var nodesList = nodes.SelectMany(n => n).Where(n => n.Incoming.Count > 0 || n.Outgoing.Count > 0).ToList();
-        var bossNodeName = config.nodeBlueprints.Where(b => b.nodeType == NodeType.Boss).ToList().Random().name;
+        var bossNodeName = config.nodeBlueprints.Where(b => b.NodeType == NodeType.Boss).ToList().Random().name;
 
         return new Map(conf.name, bossNodeName, nodesList, new List<Point>());
     }
@@ -203,10 +203,18 @@ public static class MapGenerator
 
     private static Node GetNode(Point p)
     {
-        if (p.y >= nodes.Count) return null;
-        if (p.x >= nodes[p.y].Count) return null;
-
-        return nodes[p.y][p.x];
+        if (p.Y >= nodes.Count)
+        {
+            return null;
+        }
+        else if (p.X >= nodes[p.Y].Count)
+        {
+            return null;
+        }
+        else
+        {
+            return nodes[p.Y][p.X];
+        }
     }
 
     private static Point GetFinalNode()
@@ -226,10 +234,10 @@ public static class MapGenerator
     // Generates a random path bottom up
     private static List<Point> Path(Point fromPoint, Point toPoint)
     {
-        int toRow = toPoint.y;
-        int toCol = toPoint.x;
+        int toRow = toPoint.Y;
+        int toCol = toPoint.X;
 
-        int lastNodeCol = fromPoint.x;
+        int lastNodeCol = fromPoint.X;
 
         var path = new List<Point> { fromPoint };
         var candidateCols = new List<int>();

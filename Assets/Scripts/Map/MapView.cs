@@ -1,10 +1,14 @@
-﻿using System;
+﻿// Copyright (c) TigardHighGDC
+// SPDX-License SPDX-License-Identifier: Apache-2.0
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class MapView : MonoBehaviour
 {
+    [Header("Map Settings")]
     public MapManager MapManager;
 
     public List<MapConfig> AllMapConfigs;
@@ -34,8 +38,11 @@ public class MapView : MonoBehaviour
     private GameObject mapParent;
     private List<List<Point>> paths;
     private Camera cam;
-    public readonly List<MapNode> MapNodes = new List<MapNode>();
-    private readonly List<LineConnection> lineConnections = new List<LineConnection>();
+
+    [HideInInspector]
+    public List<MapNode> MapNodes = new List<MapNode>();
+
+    private List<LineConnection> lineConnections = new List<LineConnection>();
 
     public static MapView Instance;
 
@@ -161,7 +168,7 @@ public class MapView : MonoBehaviour
         if (MapManager.CurrentMap.Path.Count == 0)
         {
             // Each node in the first layer is attainable
-            foreach (var node in MapNodes.Where(n => n.Node.Point.y == 0))
+            foreach (var node in MapNodes.Where(n => n.Node.Point.Y == 0))
             {
                 node.SetState(NodeStates.Attainable);
             }
@@ -210,8 +217,8 @@ public class MapView : MonoBehaviour
 
         foreach (var point in currentNode.Outgoing)
         {
-            var lineConnection = lineConnections.FirstOrDefault(conn => conn.from.Node == currentNode &&
-                                                                        conn.to.Node.Point.Equals(point));
+            var lineConnection = lineConnections.FirstOrDefault(conn => conn.From.Node == currentNode &&
+                                                                        conn.To.Node.Point.Equals(point));
             lineConnection?.SetColor(LineVisitedColor);
         }
 
@@ -221,8 +228,8 @@ public class MapView : MonoBehaviour
         {
             var current = MapManager.CurrentMap.Path[i];
             var next = MapManager.CurrentMap.Path[i + 1];
-            var lineConnection = lineConnections.FirstOrDefault(conn => conn.@from.Node.Point.Equals(current) &&
-                                                                        conn.to.Node.Point.Equals(next));
+            var lineConnection = lineConnections.FirstOrDefault(conn => conn.From.Node.Point.Equals(current) &&
+                                                                        conn.To.Node.Point.Equals(next));
             lineConnection?.SetColor(LineVisitedColor);
         }
     }
@@ -240,7 +247,7 @@ public class MapView : MonoBehaviour
     private NodeBlueprint GetBlueprint(NodeType type)
     {
         var config = GetConfig(MapManager.CurrentMap.ConfigName);
-        return config.nodeBlueprints.FirstOrDefault(n => n.nodeType == type);
+        return config.nodeBlueprints.FirstOrDefault(n => n.NodeType == type);
     }
 
     private NodeBlueprint GetBlueprint(string blueprintName)
