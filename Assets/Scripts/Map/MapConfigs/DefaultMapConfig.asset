@@ -26,7 +26,7 @@ MonoBehaviour:
   MaxPreBossNodes: 5
   MinStartingNodes: 3
   MaxStartingNodes: 4
-  ExtraPaths: 0
+  ExtraPaths: 4
   Layers:
     array:
     - NodeType: 0

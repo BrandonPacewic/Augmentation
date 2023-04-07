@@ -15,22 +15,22 @@ public class MapManager : MonoBehaviour
     private void Start()
     {
         // This prevents the generating of a new map until the player reaches the boss
-        if (PlayerPrefs.HasKey("Map"))
-        {
-            var mapJson = PlayerPrefs.GetString("Map");
-            var map = JsonConvert.DeserializeObject<Map>(mapJson);
+        // if (PlayerPrefs.HasKey("Map"))
+        // {
+        //     var mapJson = PlayerPrefs.GetString("Map");
+        //     var map = JsonConvert.DeserializeObject<Map>(mapJson);
 
-            if (map.Path.Any(p => p.Equals(map.GetBossNode().Point)))
-            {
-                GenerateNewMap();
-            }
-            else
-            {
-                CurrentMap = map;
-                view.ShowMap(map);
-            }
-        }
-        else
+        //     if (map.Path.Any(p => p.Equals(map.GetBossNode().Point)))
+        //     {
+        //         GenerateNewMap();
+        //     }
+        //     else
+        //     {
+        //         CurrentMap = map;
+        //         view.ShowMap(map);
+        //     }
+        // }
+        // else
         {
             GenerateNewMap();
         }
