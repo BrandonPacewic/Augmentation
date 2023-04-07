@@ -4,3 +4,15 @@
 [submodule "Assets/AstarPathfindingProject"]
 	path = Assets/AstarPathfindingProject
 	url = https://github.com/TigardHighGDC/AstarPathfindingProject.git
+
+[submodule "Assets/Unity-Reorderable-List"]
+	path = Assets/Unity-Reorderable-List
+	url = https://github.com/cfoulston/Unity-Reorderable-List.git
+
+[submodule "Assets/DOTWeen"]
+	path = Assets/DOTWeen
+	url = https://github.com/TigardHighGDC/DOTWeen.git
+
+[submodule "Assets/com.unity.uiextensions"]
+	path = Assets/com.unity.uiextensions
+	url = https://github.com/TigardHighGDC/com.unity.uiextensions.git
