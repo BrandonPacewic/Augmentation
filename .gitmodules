@@ -20,3 +20,7 @@
 [submodule "Assets/TextMesh-Pro"]
 	path = Assets/TextMesh-Pro
 	url = https://github.com/TigardHighGDC/TextMesh-Pro.git
+
+[submodule "Assets/game-icons.net"]
+	path = Assets/game-icons.net
+	url = https://github.com/TigardHighGDC/game-icons.net.git
