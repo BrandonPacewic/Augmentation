@@ -4,6 +4,15 @@
 [submodule "Assets/AstarPathfindingProject"]
 	path = Assets/AstarPathfindingProject
 	url = https://github.com/TigardHighGDC/AstarPathfindingProject.git
-[submodule "Assets/Scripts/Unity-Reorderable-List"]
-	path = Assets/Scripts/Unity-Reorderable-List
+
+[submodule "Assets/Unity-Reorderable-List"]
+	path = Assets/Unity-Reorderable-List
 	url = https://github.com/cfoulston/Unity-Reorderable-List.git
+
+[submodule "Assets/game-icons.net"]
+	path = Assets/game-icons.net
+	url = https://github.com/TigardHighGDC/game-icons.net.git
+
+[submodule "Assets/DOTWeen"]
+	path = Assets/DOTWeen
+	url = https://github.com/TigardHighGDC/DOTWeen.git
