@@ -16,3 +16,7 @@
 [submodule "Assets/com.unity.uiextensions"]
 	path = Assets/com.unity.uiextensions
 	url = https://github.com/TigardHighGDC/com.unity.uiextensions.git
+
+[submodule "Assets/TextMesh-Pro"]
+	path = Assets/TextMesh-Pro
+	url = https://github.com/TigardHighGDC/TextMesh-Pro.git
