@@ -12,7 +12,7 @@ public class Menu : MonoBehaviour
 
     public void OnStartButton()
     {
-        // TODO: Use static scene manager. See GH-139.
-        SceneManager.LoadScene(Room);
+        GameObject sceneLoader = GameObject.Find("Scene Loader");
+        sceneLoader?.GetComponent<StaticSceneLoader>()?.LoadScene(Room);
     }
 }
