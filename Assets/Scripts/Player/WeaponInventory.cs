@@ -78,7 +78,7 @@ public class WeaponInventory : MonoBehaviour
             state = State.NO_WEAPONS;
         }
     }
-
+    
     private void Update()
     {
         if (state == State.NO_WEAPONS || Time.time - lastWeaponSwitchTime < allowedWeaponSwitchTime)
